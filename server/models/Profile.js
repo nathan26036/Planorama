@@ -21,7 +21,8 @@ const profileSchema = new Schema({
   },
   events: [
     {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'Event',
     },
   ],
 });
