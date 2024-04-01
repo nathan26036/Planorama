@@ -12,11 +12,13 @@ const eventSchema = new Schema({
     required: false,
   },
   date: {
-    type: Date
+    type: Date,
+    required: true,
   } ,
   rsvp: [
     {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'Rsvp',
     },
   ],
 });
