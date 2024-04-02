@@ -1,24 +1,25 @@
 import React, { useEffect } from 'react';
-import FullCalendar from '@fullcalendar/react';
-import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
-import '@fullcalendar/resource-timeline/main.css';
+import { Calendar } from '@fullcalendar/core'
+import timeGridPlugin from '@fullcalendar/timegrid'
 
-const Calendar = () => {
+const Planner = () => {
   useEffect(() => {
-    const calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
-      plugins: [resourceTimelinePlugin],
-      initialView: 'resourceTimelineWeek'
-    });
-    calendar.render();
-
-    return () => {
-      calendar.destroy();
-    };
-  }, []);
+  var calendarEl = document.getElementById('calendar');
+  const calendar = new Calendar(calendarEl, {
+    plugins: [timeGridPlugin],
+    initialView: 'timeGridWeek',
+    headerToolbar: {
+      left: 'prev,next',
+      center: 'title',
+      right: 'timeGridWeek,timeGridDay' // user can switch between the two
+    }
+  })
+  calendar.render()
+}, []);
 
   return (
     <div id='calendar'></div>
   );
 };
 
-export default Calendar;
+export default Planner;
