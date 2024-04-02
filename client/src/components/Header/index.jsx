@@ -12,7 +12,7 @@ const Header = () => {
       <div className="container flex-column justify-space-between-lg justify-start align-start text-center">
         <Link className="text-dark" to="/homepage">
           <h1 className="m-0" style={{ fontSize: '3rem' }}>
-            Planorama
+            Welcome to Planorama!
           </h1>
         </Link>
         <div>
@@ -27,7 +27,7 @@ const Header = () => {
             </button>
           ) : (
             <>
-              <Link className="btn btn-lg btn-primary m-2" to="/login">
+              <Link className="btn btn-lg btn-primary m-2" to="/">
                 Login
               </Link>
               <Link className="btn btn-lg btn-light m-2" to="/signup">
