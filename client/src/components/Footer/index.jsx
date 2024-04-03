@@ -2,7 +2,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
-const Footer = () => {
+const Footer = ({ isLoggedIn }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
@@ -20,6 +20,11 @@ const Footer = () => {
         // newEvent is then added to the array and the setEvents sets the new value for 'events'
         setEvents(prevEvents => [...prevEvents, newEvent]);
     };
+
+    // render the footer only if the user is logged in 
+    if(!isLoggedIn) {
+        return null;
+    }
 
     return(
         // setting the footer
