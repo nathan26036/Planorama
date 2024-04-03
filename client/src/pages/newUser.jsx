@@ -37,6 +37,7 @@ const Signup = () => {
       console.log(data);
       
       Auth.login(data.addProfile.token);
+      window.location.assign('/homepage')
     } catch (e) {
       console.error(e);
     }
