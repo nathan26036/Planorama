@@ -18,6 +18,18 @@ const resolvers = {
     },
     // define mutation resolvers for creating new events, profiles and RSVPs
     Mutation: {
+        login: async (parent, { email, password }) => {
+            const profile = await Profile.findOne( { email });
+            if (!profile) {
+                throw AuthenticationError;
+            }
+            const correctPw = await profile.isCorrectPassword(password);
+            if(!correctPw) {
+                throw AuthenticationError;
+            }
+            const token = signToken(profile);
+            return { token, profile };
+        },
         // creating a new event document. Passing in title, description and date
         addEvent: async (parent, { title, description, date }) => {
             const event = await Event.create({ title, description, date });
