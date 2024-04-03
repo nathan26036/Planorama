@@ -1,5 +1,6 @@
 // import models
 const { Event, Profile, Rsvp } = require('../models');
+const { signToken, AuthenticationError } = require ('../utils/auth');
 
 // defining resolvers
 const resolvers = {
@@ -18,18 +19,19 @@ const resolvers = {
     // define mutation resolvers for creating new events, profiles and RSVPs
     Mutation: {
         // creating a new event document. Passing in title, description and date
-        createEvent: async (parent, { title, description, date }) => {
+        addEvent: async (parent, { title, description, date }) => {
             const event = await Event.create({ title, description, date });
             return event;
         },
         // creating a new profile document. Passing in the name and email
-        createProfile: async (parent, { name, email }) => {
-            const profile = await Profile.create({ name, email });
-            return profile;
+        addProfile: async (parent, { name, email, password }) => {
+            const profile = await Profile.create({ name, email, password });
+            const token = signToken(profile);
+            return {token, profile};
         },
         // creating a new RSVP document. Pushing eventId, name, description and plusOne
         // if someone RSVPs then we update the Event document
-        createRsvp: async (parent, { eventId, name, description, plusOne }) => {
+        addRsvp: async (parent, { eventId, name, description, plusOne }) => {
             const rsvp = await Rsvp.create({ eventId, name, description, plusOne });
 
             await Event.findByIdAndUpdate(eventId, { $push: { rsvp: rsvp } });
