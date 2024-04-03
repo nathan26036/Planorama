@@ -76,15 +76,6 @@ const Login = (props) => {
                 >
                   Submit
                 </button>
-                <Link to="/signup">
-                <button
-                  className="mt-3 btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Sign up here!
-                </button>
-              </Link>
               </form>
             )}
 

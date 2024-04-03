@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import React from 'react';
 import Auth from '../../utils/auth';
 
 const Header = () => {
@@ -15,15 +15,20 @@ const Header = () => {
             Welcome to Planorama!
           </h1>
         </Link>
-        <div>
-        <Link className="btn btn-lg btn-light m-2" to="/calendar">
-            Calendar
-          </Link>
-          {Auth.loggedIn() ? (
-            <button className="btn btn-lg btn-light m-2" onClick={logout}>
-              Logout
-            </button>
-          ) : (
+        <nav className='text-center'>
+          {Auth.loggedIn() && (
+            <>
+              <Link className="btn btn-lg btn-light m-2" to="/calendar">
+                Calendar
+              </Link>
+
+              <button className="btn btn-lg btn-light m-2" onClick={logout}>
+                Logout
+              </button>
+            </>
+          )}
+
+          {!Auth.loggedIn() && (
             <>
               <Link className="btn btn-lg btn-primary m-2" to="/">
                 Login
@@ -33,7 +38,7 @@ const Header = () => {
               </Link>
             </>
           )}
-        </div>
+        </nav>
       </div>
     </header>
   );
