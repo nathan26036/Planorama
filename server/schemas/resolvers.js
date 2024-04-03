@@ -49,7 +49,25 @@ const resolvers = {
             await Event.findByIdAndUpdate(eventId, { $push: { rsvp: rsvp } });
 
             return rsvp;
-        }
+        },
+        // creating the login mutation. Checks if email matches 
+        // checks if password matches. If they both match return the token and profile
+        login: async (parent, { email, password }) => {
+            const profile = await Profile.findOne({ email });
+      
+            if (!profile) {
+              throw AuthenticationError;
+            }
+      
+            const correctPw = await profile.isCorrectPassword(password);
+      
+            if (!correctPw) {
+              throw AuthenticationError;
+            }
+      
+            const token = signToken(profile);
+            return { token, profile };
+          },
     },
 };
 

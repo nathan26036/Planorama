@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState, useEffect } from 'react';
 import { setContext } from '@apollo/client/link/context'
 import { Outlet } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
@@ -28,6 +29,16 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // check if the user is logged in 
+  useEffect(() => {
+    const token = localStorage.getItem('id_token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <ApolloProvider client={client}>
     <div className="flex-column justify-flex-start min-100-vh">
@@ -35,7 +46,7 @@ function App() {
       <div>
         <Outlet />
       </div>
-        <Footer />
+        <Footer isLoggedIn={isLoggedIn}/>
     </div>
     </ApolloProvider>
   );

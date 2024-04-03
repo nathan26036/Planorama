@@ -36,6 +36,8 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         addProfile(name: String!, email: String!, password: String!): Auth
+        login(email: String!, password: String! ): Auth
+
         addRsvp(eventId: ID!, name: String!, description: String, plusOne:[String]): Rsvp
         addEvent(title: String!, description: String, date:Int ): Event
     }
