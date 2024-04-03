@@ -42,7 +42,7 @@ const Signup = () => {
 
   return (
     <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
+      <div className="col-12 col-lg-5 col-md-8 col-sm-10">
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
           <div className="card-body">
@@ -84,6 +84,15 @@ const Signup = () => {
                 >
                   Submit
                 </button>
+                <Link to="/">
+                <button
+                  className="mt-3 btn btn-block btn-primary"
+                  style={{ cursor: 'pointer' }}
+                  type="submit"
+                >
+                  Back to Login!
+                </button>
+              </Link>
               </form>
             )}
 
