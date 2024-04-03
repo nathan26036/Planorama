@@ -1,10 +1,10 @@
 // create the graphQL schema
 const typeDefs = `
     type Profile {
-        _id: ID!
-        name: String!
-        email: String!
-        password: String!
+        _id: ID
+        name: String
+        email: String
+        password: String
         events: [Event]
     }
 
@@ -23,15 +23,20 @@ const typeDefs = `
        rsvp:[Rsvp] 
     }
 
+    type Auth {
+        token: ID!
+        profile: Profile 
+    }
+
     type Query {
         events: [Event]
         profiles: [Profile]
     }
 
     type Mutation {
-        createProfile(name: String!, email: String!): Profile
-        createRsvp(eventId: ID!, name: String!, description: String, plusOne:[String]): Rsvp
-        createEvent(title: String!, description: String, date:Int ): Event
+        addProfile(name: String!, email: String!, password: String!): Auth
+        addRsvp(eventId: ID!, name: String!, description: String, plusOne:[String]): Rsvp
+        addEvent(title: String!, description: String, date:Int ): Event
     }
 `;
 
