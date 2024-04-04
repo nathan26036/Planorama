@@ -24,7 +24,7 @@ function MyVerticallyCenteredModal(props) {
         <h4>Enter the name of your new event:</h4>
         <input className="input" id="eventTitle" type="text" placeholder="Event Name"></input>
         <h4>Enter a short description of the event:</h4>
-        <input className="input" id="eventTitle" type="text" placeholder="Description"></input>
+        <input className="input" id="eventDescription" type="text" placeholder="Description"></input>
         <h4>Enter the date and time of your event:</h4>
         <input className="input" id="eventDate" type="datetime-local" placeholder="Date"></input>
       </Modal.Body>
