@@ -5,7 +5,6 @@ import { Outlet } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 
 import Header from './components/Header';
-import Footer from './components/Footer';
 
 const httpLink = createHttpLink({
   uri: '/graphql'
@@ -46,7 +45,6 @@ function App() {
       <div>
         <Outlet />
       </div>
-        <Footer isLoggedIn={isLoggedIn}/>
     </div>
     </ApolloProvider>
   );
