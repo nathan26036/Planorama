@@ -5,6 +5,9 @@ import { useQuery } from '@apollo/client';
 import { QUERY_EVENTS } from '../utils/queries';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import { useMutation } from '@apollo/client';
+import { ADD_EVENT } from '../utils/mutations';
 
 
 function MyVerticallyCenteredModal(props) {
@@ -21,12 +24,6 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Enter the name of your new event:</h4>
-        <input className="input" id="eventTitle" type="text" placeholder="Event Name"></input>
-        <h4>Enter a short description of the event:</h4>
-        <input className="input" id="eventDescription" type="text" placeholder="Description"></input>
-        <h4>Enter the date and time of your event:</h4>
-        <input className="input" id="eventDate" type="datetime-local" placeholder="Date"></input>
       </Modal.Body>
       <Modal.Footer>
         <Button>Save</Button>

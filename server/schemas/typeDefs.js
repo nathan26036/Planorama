@@ -19,7 +19,7 @@ const typeDefs = `
        _id: ID!
        title: String!
        description: String
-       date: Int
+       date: date
        rsvp:[Rsvp] 
     }
 
