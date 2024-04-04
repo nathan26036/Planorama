@@ -37,6 +37,7 @@ const Signup = () => {
       console.log(data);
       
       Auth.login(data.addProfile.token);
+      window.location.assign('/homepage')
     } catch (e) {
       console.error(e);
     }
@@ -50,8 +51,8 @@ const Signup = () => {
           <div className="card-body">
             {data ? (
               <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                Success! You may now head {' '}
+                <Link to="/homepage">back to the homepage.</Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
