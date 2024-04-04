@@ -42,12 +42,7 @@ const Footer = ({ isLoggedIn }) => {
                         Go to Homepage
                     </button>
                 ) : (
-                    <button
-                    className='btn btn-dark mb-3'
-                    onClick={createEvent}
-                    >
-                        Create Event!
-                    </button>
+                    <></>
                 )}
             </div>
         </footer>
