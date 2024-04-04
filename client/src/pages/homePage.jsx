@@ -24,21 +24,55 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <h4>Enter the name of your new event:</h4>
+        <input className="input" id="eventTitle" type="text" placeholder="Event Name"></input>
+        <h4>Enter a short description of the event:</h4>
+        <input className="input" id="eventDescription" type="text" placeholder="Description"></input>
+        <h4>Enter the date and time of your event:</h4>
+        <input className="input" id="eventDate" type="datetime-local" placeholder="Date"></input>
+        <Form onSubmit={handleFormSubmit}>
+<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+  <Form.Label>Enter the name of your new event:</Form.Label>
+  <Form.Control type="email" name='title' placeholder="New Event" onChange={handleChange} value={formState.title}/>
+</Form.Group>
+<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+  <Form.Label>Enter a short description of the event:</Form.Label>
+  <Form.Control as="textarea" name='description' placeholder="Description" onChange={handleChange} value={formState.description}/>
+</Form.Group>
+<Form.Group className="mb-3">
+  <Form.Label>Enter the date and time of your event:</Form.Label>
+  <Form.Control type="datetime-local" name='date' id="eventDate" onChange={handleChange} value={formState.date}/>
+</Form.Group>
+</Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button>Save</Button>
+        <Button onClick={props.handleEventSubmit}>Save</Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 const Home = () => {
+  const { loading, data } = useQuery(QUERY_EVENTS, {
+    fetchPolicy: "no-cache"
+  });
+
   const [modalShow, setModalShow] = useState(false);
 
-    const { loading, data } = useQuery(QUERY_EVENTS, {
-        // this ensures that the data is always fetched from the server
-        fetchPolicy: "no-cache"
+  const [eventTitle, setEventName ] = useState('');
+  const [eventDescription, setEventDescription ] = useState('');
+  const [eventDate, setEventDate ] = useState('');
+
+  const handleEventSubmit = () => {
+    console.log({
+      eventTitle,
+      eventDescription,
+      eventDate
     });
+
+    setModalShow(false);
+  }
+
 
     // extracting the events array from the data object
     // if there are no events an empty array is initialized
@@ -80,6 +114,13 @@ const Home = () => {
       <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}
+        eventTitle={eventTitle}
+        setEventName={setEventName}
+        eventDescription={eventDescription}
+        setEventDescription={setEventDescription}
+        eventDate={eventDate}
+        setEventDate={setEventDate}
+        handleEventSubmit={handleEventSubmit}
       />
 </>
             </div>
