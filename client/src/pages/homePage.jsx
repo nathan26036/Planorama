@@ -22,26 +22,40 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
       <Modal.Body>
         <h4>Enter the name of your new event:</h4>
-        <input className="input" id="eventTitle" type="text" placeholder="Event Name"></input>
+        <input className="form-control" id="eventTitle" type="text" value={props.eventTitle}  onChange={(e) => props.setEventName(e.target.value)} placeholder="Event Name"></input>
         <h4>Enter a short description of the event:</h4>
-        <input className="input" id="eventDescription" type="text" placeholder="Description"></input>
+        <input className="form-control" id="eventDescription" type="text" value={props.eventDescription} onChange={(e) => props.setEventDescription(e.target.value)} placeholder="Description"></input>
         <h4>Enter the date and time of your event:</h4>
-        <input className="input" id="eventDate" type="datetime-local" placeholder="Date"></input>
+        <input className="input" id="eventDate" type="datetime-local" value={props.eventDate} onChange={(e) => props.setEventDate(e.target.value)} placeholder="Date"></input>
       </Modal.Body>
       <Modal.Footer>
-        <Button>Save</Button>
+        <Button onClick={props.handleEventSubmit}>Save</Button>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 const Home = () => {
+  const { loading, data } = useQuery(QUERY_EVENTS, {
+    fetchPolicy: "no-cache"
+  });
+
   const [modalShow, setModalShow] = useState(false);
 
-    const { loading, data } = useQuery(QUERY_EVENTS, {
-        // this ensures that the data is always fetched from the server
-        fetchPolicy: "no-cache"
+  const [eventTitle, setEventName ] = useState('');
+  const [eventDescription, setEventDescription ] = useState('');
+  const [eventDate, setEventDate ] = useState('');
+
+  const handleEventSubmit = () => {
+    console.log({
+      eventTitle,
+      eventDescription,
+      eventDate
     });
+
+    setModalShow(false);
+  }
+
 
     // extracting the events array from the data object
     // if there are no events an empty array is initialized
@@ -83,6 +97,13 @@ const Home = () => {
       <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}
+        eventTitle={eventTitle}
+        setEventName={setEventName}
+        eventDescription={eventDescription}
+        setEventDescription={setEventDescription}
+        eventDate={eventDate}
+        setEventDate={setEventDate}
+        handleEventSubmit={handleEventSubmit}
       />
 </>
             </div>
