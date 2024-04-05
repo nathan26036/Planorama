@@ -1,10 +1,23 @@
 // import models
 const { Event, Profile, Rsvp } = require('../models');
 const { signToken, AuthenticationError } = require ('../utils/auth');
+const { GraphQLScalarType } = require ('graphql');
+
+const dateScalar = new GraphQLScalarType({
+  name: 'Date',
+  parseValue(value) {
+    return new Date(value);
+  },
+  serialize(value) {
+    return value.toISOString();
+  },
+})
 
 // defining resolvers
 const resolvers = {
+    Date: dateScalar,
     Query: {
+
         // create query resolvers events and profiles
         // not including RSVPs becuase they don't need to be fetched every time
         events: async () => {

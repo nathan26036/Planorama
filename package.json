@@ -17,6 +17,8 @@
     "concurrently": "^8.2.0"
   },
   "dependencies": {
-    "fullcalendar-scheduler": "^6.1.11"
+    "fullcalendar-scheduler": "^6.1.11",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-scalars": "^1.23.0"
   }
 }

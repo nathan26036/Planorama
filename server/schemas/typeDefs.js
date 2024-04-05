@@ -1,5 +1,6 @@
 // create the graphQL schema
 const typeDefs = `
+scalar Date
     type Profile {
         _id: ID
         name: String
@@ -14,12 +15,13 @@ const typeDefs = `
         description: String
         plusOne: [String]
     }
-
+    scalar Date
+    
     type Event {
        _id: ID!
        title: String!
        description: String
-       date: date
+       date: Date
        rsvp:[Rsvp] 
     }
 
@@ -37,7 +39,7 @@ const typeDefs = `
         login(email: String!, password: String!): Auth
         addProfile(name: String!, email: String!, password: String!): Auth
         addRsvp(eventId: ID!, name: String!, description: String, plusOne:[String]): Rsvp
-        addEvent(title: String!, description: String, date:Int ): Event
+        addEvent(title: String!, description: String, date: Date ): Event
     }
 `;
 
