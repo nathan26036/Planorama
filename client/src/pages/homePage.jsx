@@ -1,5 +1,5 @@
 // importing navigation links, hook for making GraphQL queries and QUERY_EVENTS to render a list of events
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_EVENTS } from '../utils/queries';
@@ -8,6 +8,8 @@ import Modal from 'react-bootstrap/Modal';
 
 
 function MyVerticallyCenteredModal(props) {
+  const { eventTitle, eventDescription, eventDate, setEventName, setEventDescription, setEventDate, handleEventSubmit, onHide } = props;
+
   return (
     <Modal
       {...props}
@@ -22,30 +24,43 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
       <Modal.Body>
         <h4>Enter the name of your new event:</h4>
-        <input className="form-control" id="eventTitle" type="text" value={props.eventTitle}  onChange={(e) => props.setEventName(e.target.value)} placeholder="Event Name"></input>
+        <input className="form-control" id="eventTitle" type="text" value={eventTitle}  onChange={(e) => setEventName(e.target.value)} placeholder="Event Name"></input>
         <h4>Enter a short description of the event:</h4>
-        <input className="form-control" id="eventDescription" type="text" value={props.eventDescription} onChange={(e) => props.setEventDescription(e.target.value)} placeholder="Description"></input>
+        <input className="form-control" id="eventDescription" type="text" value={eventDescription} onChange={(e) => setEventDescription(e.target.value)} placeholder="Description"></input>
         <h4>Enter the date and time of your event:</h4>
-        <input className="input" id="eventDate" type="datetime-local" value={props.eventDate} onChange={(e) => props.setEventDate(e.target.value)} placeholder="Date"></input>
+        <input className="input" id="eventDate" type="datetime-local" value={eventDate} onChange={(e) => setEventDate(e.target.value)} placeholder="Date"></input>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.handleEventSubmit}>Save</Button>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={handleEventSubmit}>Save</Button>
+        <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 const Home = () => {
+  // fetching data from server instead of using cached data
   const { loading, data } = useQuery(QUERY_EVENTS, {
     fetchPolicy: "no-cache"
   });
 
+  // modalShow manages whether the modal is shown or hidden
+  // the rest of them are used to manage the input values and list of events
   const [modalShow, setModalShow] = useState(false);
-
   const [eventTitle, setEventName ] = useState('');
   const [eventDescription, setEventDescription ] = useState('');
   const [eventDate, setEventDate ] = useState('');
+  const [eventList, setEventList] = useState([]);
 
+  // used to load previously stored events from localStorage 
+  useEffect(() => {
+    const storedEvents = localStorage.getItem('userEvents');
+    if (storedEvents) {
+      setEventList(JSON.parse(storedEvents));
+    }
+  }, []);
+
+  // collects the input values and updates the eventList stat by adding the new event to it
+  // it also stores teh updated event list in localStorage
   const handleEventSubmit = () => {
     console.log({
       eventTitle,
@@ -53,13 +68,17 @@ const Home = () => {
       eventDate
     });
 
+    const newEvent = {
+      _id: Math.random().toString(36).substr(2, 9),
+      title: eventTitle,
+      description: eventDescription,
+      date: eventDate
+    };
+
+    setEventList([...eventList, newEvent]);
+    localStorage.setItem('userEvents', JSON.stringify([...eventList, newEvent]));
     setModalShow(false);
   }
-
-
-    // extracting the events array from the data object
-    // if there are no events an empty array is initialized
-    const eventList = data?.events || [];
 
     return(
         <div className='align-center flex-column container text-center text-light bg-primary'>
@@ -72,16 +91,14 @@ const Home = () => {
                 ) : (
                     <ul className='square'>
                         {/* mapping through event list and rendering each event and linking to the actual event */}
-                        {eventList.map((event) => {
-                            return (
+                        {eventList.map((event) => (
                                 // generating each title of events by ID
                                 <li key = {event._id}>
-                                    <Link to = {{ pathname: `/event/${event._id}`}}>
+                                    <Link to = {{ pathname: `/event/${event._id}`}} className='text-light linkStyle'>
                                         {event.title}
                                     </Link>
-                                </li>
-                            );
-                        })}
+                                </li>          
+                        ))}
                     </ul>
                 )}
             </div>
@@ -93,14 +110,15 @@ const Home = () => {
       <Button variant="primary" onClick={() => setModalShow(true)}>
         Create an Event!
       </Button>
-
+      
+      {/* this code sets up the modal component with various props  */}
       <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}
         eventTitle={eventTitle}
         setEventName={setEventName}
-        eventDescription={eventDescription}
         setEventDescription={setEventDescription}
+        eventDescription={eventDescription}
         eventDate={eventDate}
         setEventDate={setEventDate}
         handleEventSubmit={handleEventSubmit}
@@ -108,7 +126,7 @@ const Home = () => {
 </>
             </div>
         </div>
-    )
+    );
 };
 
 export default Home;
