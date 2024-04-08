@@ -979,6 +979,10 @@ a:hover {
   display: flex !important;
 }
 
+.delete-button{
+  margin-left: 2rem;
+}
+
 .btn {
   text-align: center;
   display: inline-block;
