@@ -13,9 +13,7 @@ const Header = () => {
       <div className="container flex-column justify-space-between-lg justify-center align-center text-center">
       {Auth.loggedIn() && (
         <Link className="text-dark" to="/homepage">
-          <h1 className=" m-0" style={{ fontSize: '3rem' }}>
-            Planorama
-          </h1>
+          <img src='../../assets/Images/Planorama.png' alt='Planorama'></img>
         </Link>
       )}
     {!Auth.loggedIn() && (          

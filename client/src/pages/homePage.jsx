@@ -6,8 +6,6 @@ import { QUERY_EVENTS } from '../utils/queries';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { v4 as uuidv4 } from 'uuid';
-import Form from 'react-bootstrap/Form';
-
 
 // const { eventTitle, eventDescription, eventDate, setEventName, setEventDescription, setEventDate, handleEventSubmit, onHide } = props;
 
@@ -83,6 +81,7 @@ const Home = () => {
   // modalShow manages whether the modal is shown or hidden
   // the rest of them are used to manage the input values and list of events
   const [modalShow, setModalShow] = useState(false);
+  const [dataShow, setdataShow] = useState(false);
   const [eventTitle, setEventName] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [eventDate, setEventDate] = useState('');
@@ -110,7 +109,7 @@ const Home = () => {
       _id: uuidv4(),
       title: eventTitle,
       description: eventDescription,
-      date: eventDate
+      start: eventDate
     };
 
     setEventList([...eventList, newEvent]);
@@ -127,7 +126,7 @@ const Home = () => {
 
   const handleEventDisplay = (event) => {
     setSelectedEvent(event);
-    setModalShow(true);
+    setdataShow(true);
   };
 
   return (
@@ -146,9 +145,9 @@ const Home = () => {
               // generating each title of events by ID
               <li key={event._id} >
                 
-                <Link to={{ pathname: `/event/${event._id}` }} className='text-light linkStyle'>
+                <Button variant="primary" onClick={() => setdataShow(true)}>
                   {event.title}
-                </Link>
+                </Button>
 
                 <button onClick={() => deleteEvent(event._id)} className='btn btn-danger delete-button'>Delete</button>
 
@@ -156,38 +155,15 @@ const Home = () => {
             ))}
           </ul>
            <DisplayEventModal
-           show={modalShow}
-           onHide={() => setModalShow(false)}
-           eventTitle={selectedEvent ? selectedEvent.title : ""}
-           eventDescription={selectedEvent ? selectedEvent.description : ""}
-           eventDate={selectedEvent ? selectedEvent.date : ""}
-           handleEventDisplay = {handleEventDisplay}
+           show={dataShow}
+           onHide={() => setdataShow(false)}
+           eventtitle={selectedEvent ? handleEventDisplay.title : ""}
+           eventdescription={selectedEvent ? handleEventDisplay.description : ""}
+           eventdate={selectedEvent ? handleEventDisplay.start : ""}
          />
          </>
         )}
       </div>
-    return(
-        <div className='align-center flex-column container text-center text-light bg-primary'>
-        
-            <div className='m-5'>
-                <h2>Here's a list of all upcoming events:</h2>
-                {/* if data is loading then 'Loading...' will be displayed otherwise all the events will be displayed */}
-                {loading ? (
-                 <div>Loading...</div>   
-                ) : (
-                    <ul className='square'>
-                        {/* mapping through event list and rendering each event and linking to the actual event */}
-                        {eventList.map((event) => (
-                                // generating each title of events by ID
-                                <li key = {event._id}>
-                                    <Button variant="primary" onClick={() => setModalShow(true)}>
-                                        {event.title}
-                                    </Button>
-                                </li>          
-                        ))}
-                    </ul>
-                )}
-            </div>
 
       <div className='text-center m-3'>
         <h2>Want to create an event?</h2>
