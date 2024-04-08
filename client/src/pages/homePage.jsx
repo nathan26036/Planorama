@@ -81,6 +81,7 @@ const Home = () => {
   // modalShow manages whether the modal is shown or hidden
   // the rest of them are used to manage the input values and list of events
   const [modalShow, setModalShow] = useState(false);
+  const [dataShow, setdataShow] = useState(false);
   const [eventTitle, setEventName] = useState('');
   const [eventDescription, setEventDescription] = useState('');
   const [eventDate, setEventDate] = useState('');
@@ -108,7 +109,7 @@ const Home = () => {
       _id: uuidv4(),
       title: eventTitle,
       description: eventDescription,
-      date: eventDate
+      start: eventDate
     };
 
     setEventList([...eventList, newEvent]);
@@ -125,7 +126,7 @@ const Home = () => {
 
   const handleEventDisplay = (event) => {
     setSelectedEvent(event);
-    setModalShow(true);
+    setdataShow(true);
   };
 
   return (
@@ -144,9 +145,9 @@ const Home = () => {
               // generating each title of events by ID
               <li key={event._id} >
                 
-                <Link to={{ pathname: `/event/${event._id}` }} className='text-light linkStyle'>
+                <Button variant="primary" onClick={() => setdataShow(true)}>
                   {event.title}
-                </Link>
+                </Button>
 
                 <button onClick={() => deleteEvent(event._id)} className='btn btn-danger delete-button'>Delete</button>
 
@@ -154,12 +155,11 @@ const Home = () => {
             ))}
           </ul>
            <DisplayEventModal
-           show={modalShow}
-           onHide={() => setModalShow(false)}
-           eventTitle={selectedEvent ? selectedEvent.title : ""}
-           eventDescription={selectedEvent ? selectedEvent.description : ""}
-           eventDate={selectedEvent ? selectedEvent.date : ""}
-           handleEventDisplay = {handleEventDisplay}
+           show={dataShow}
+           onHide={() => setdataShow(false)}
+           eventtitle={selectedEvent ? handleEventDisplay.title : ""}
+           eventdescription={selectedEvent ? handleEventDisplay.description : ""}
+           eventdate={selectedEvent ? handleEventDisplay.start : ""}
          />
          </>
         )}
