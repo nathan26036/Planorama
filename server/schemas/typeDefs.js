@@ -1,7 +1,7 @@
 // create the graphQL schema
 const typeDefs = `
     type Profile {
-        _id: ID
+        _id: ID!
         name: String
         email: String
         password: String
