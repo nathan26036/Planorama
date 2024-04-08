@@ -42,7 +42,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 function DisplayEventModal(props) {
-  const { eventTitle, eventDescription, eventDate, onHide } = props;
+  const { eventtitle, eventdescription, eventdate, onHide } = props;
 
   return (
     <Modal
@@ -53,15 +53,15 @@ function DisplayEventModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id='contained-modal-title-vcenter'>
-          {eventTitle}
+          {eventtitle}
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
         <h2>Description:</h2>
-        <p>{eventDescription}</p>
+        <p>{eventdescription}</p>
         <h3>Date:</h3>
-        <p>{eventDate}</p>
+        <p>{eventdate}</p>
       </Modal.Body>
 
       <Modal.Footer>
