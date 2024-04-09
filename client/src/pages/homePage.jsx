@@ -42,7 +42,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 function DisplayEventModal(props) {
-  const { eventtitle, eventdescription, eventdate, onHide } = props;
+  const { eventTitle, eventDescription, eventDate, onHide } = props;
 
   return (
     <Modal
@@ -53,15 +53,15 @@ function DisplayEventModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id='contained-modal-title-vcenter'>
-          {eventtitle}
+          {eventTitle}
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
         <h2>Description:</h2>
-        <p>{eventdescription}</p>
+        <p>{eventDescription}</p>
         <h3>Date:</h3>
-        <p>{eventdate}</p>
+        <p>{eventDate}</p>
       </Modal.Body>
 
       <Modal.Footer>
@@ -86,7 +86,7 @@ const Home = () => {
   const [eventDescription, setEventDescription] = useState('');
   const [eventDate, setEventDate] = useState('');
   const [eventList, setEventList] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState([]);
 
   // used to load previously stored events from localStorage 
   useEffect(() => {
@@ -124,9 +124,21 @@ const Home = () => {
     localStorage.setItem('userEvents', JSON.stringify(updatedList));
   };
 
-  const handleEventDisplay = (event) => {
-    setSelectedEvent(event);
-    setdataShow(true);
+  const handleEventDisplay = (eventId) => {
+    const selectEvent = eventList.find(event => event._id === eventId);
+    
+    if (selectEvent) {
+      console.log("Event title:", selectEvent.title);
+      console.log("Event description:", selectEvent.description);
+      console.log("Event date:", selectEvent.start);
+
+      setModalShow(false);
+      setSelectedEvent(selectEvent);
+      
+    }
+    else{
+      console.log('event not found')
+    }
   };
 
   return (
@@ -145,7 +157,7 @@ const Home = () => {
               // generating each title of events by ID
               <li key={event._id} >
                 
-                <Button variant="primary" onClick={() => setdataShow(true)}>
+                <Button variant="primary" onClick={() => {setdataShow(true); handleEventDisplay(event._id);}}>
                   {event.title}
                 </Button>
 
@@ -157,9 +169,13 @@ const Home = () => {
            <DisplayEventModal
            show={dataShow}
            onHide={() => setdataShow(false)}
-           eventtitle={selectedEvent ? handleEventDisplay.title : ""}
-           eventdescription={selectedEvent ? handleEventDisplay.description : ""}
-           eventdate={selectedEvent ? handleEventDisplay.start : ""}
+          //  eventtitle={selectedEvent ? handleEventDisplay.title : ""}
+          //  eventdescription={selectedEvent ? handleEventDisplay.description : ""}
+          //  eventdate={selectedEvent ? handleEventDisplay.start : ""}
+          eventTitle = {selectedEvent.title}
+          eventDescription = {selectedEvent.description}
+          eventDate = {selectedEvent.start}
+           handleEventDisplay = {handleEventDisplay}
          />
          </>
         )}
