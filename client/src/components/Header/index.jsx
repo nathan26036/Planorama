@@ -26,8 +26,8 @@ const Header = () => {
     <div className="mr-5 mt-2" >
           {Auth.loggedIn() && (
     
-    <ul className="list-inline me-auto mb-2 mb-lg-0">
-      <li className="nav-item">
+    <ul className="list-inline d-flex align-items-center mb-2 mb-lg-0">
+      <li className="nav-item me-3">
         <h4><a className="list-inline-item text-light" href="/calendar">Calendar</a></h4>
       </li>
       <li className="nav-item">
