@@ -28,9 +28,9 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
       <Modal.Body className='dark'>
         <h5 className='text-light'>Enter the name of your new event:</h5>
-        <input className="form-control text-light" id="eventTitle" type="text" value={eventTitle} onChange={(e) => setEventName(e.target.value)} placeholder="Event Name"></input>
+        <input className="form-control" id="eventTitle" type="text" value={eventTitle} onChange={(e) => setEventName(e.target.value)} placeholder="Event Name"></input>
         <h5 className='text-light mt-2'>Enter a short description of the event:</h5>
-        <input className="form-control text-light" id="eventDescription" type="text" value={eventDescription} onChange={(e) => setEventDescription(e.target.value)} placeholder="Description"></input>
+        <input className="form-control" id="eventDescription" type="text" value={eventDescription} onChange={(e) => setEventDescription(e.target.value)} placeholder="Description"></input>
         <h5 className='text-light mt-2'>Enter the date and time of your event:</h5>
         <input className="input" id="eventDate" type="datetime-local" value={eventDate} onChange={(e) => setEventDate(e.target.value)} placeholder="Date"></input>
       </Modal.Body>
