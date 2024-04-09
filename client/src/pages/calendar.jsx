@@ -2,12 +2,12 @@ import React, {useState, useEffect } from 'react';
 import { Calendar } from '@fullcalendar/core'
 import timeGridPlugin from '@fullcalendar/timegrid'
 
-let myEvent = useEffect(() => {
-  const storedEvents = localStorage.getItem('userEvents');
-  if (storedEvents) {
-    setEventList(JSON.parse(storedEvents));
-  }
-}, []);
+// let myEvent = useEffect(() => {
+//   const storedEvents = localStorage.getItem('userEvents');
+//   if (storedEvents) {
+//     setEventList(JSON.parse(storedEvents));
+//   }
+// }, []);
 
 const Planner = () => {
   useEffect(() => {
