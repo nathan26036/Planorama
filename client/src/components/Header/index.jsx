@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import Auth from '../../utils/auth';
+import './nav.css';
 
 const Header = () => {
   const logout = (event) => {
@@ -9,37 +10,41 @@ const Header = () => {
     window.location.assign('/')
   };
   return (
-    <header className="col-lg-12 bg-info text-dark mb-4 py-3 display-flex align-center">
-      <div className="container flex-column justify-space-between-lg justify-center align-center text-center">
+    
+    <nav className="navbar bg-dark border-bottom border-body mb-5" data-bs-theme="dark">
+      <div className="container-fluid">
       {Auth.loggedIn() && (
-        <Link className="text-dark" to="/homepage">
-          <img src='../../assets/Images/Planorama.png' alt='Planorama'></img>
-        </Link>
+        <div className="">
+          <h1><a className=" text-light " href="/homepage">Planorama</a></h1>
+        </div>
+
       )}
     {!Auth.loggedIn() && (          
       <h1 className=" m-0" style={{ fontSize: '3rem' }}>
       Welcome to Planorama!
     </h1>)}
-        <nav className='text-center'>
+    <div className="justify-content-end" id="navbarNav">
           {Auth.loggedIn() && (
-            <>
-              <Link className="btn btn-lg btn-light m-2" to="/calendar">
-                Calendar
-              </Link>
-
-              <button className="btn btn-lg btn-light m-2" onClick={logout}>
-                Logout
-              </button>
-            </>
+    
+    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+      <li className="nav-item">
+        <a className="nav-link text-light" href="/calendar">Calendar</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link text-light" onClick={logout}>Logout</a>
+      </li>
+    </ul>
+ 
           )}
 
           {!Auth.loggedIn() && (
             <>
             </>
           )}
-        </nav>
-      </div>
-    </header>
+          
+        </div>
+      </div >
+    </nav>
   );
 };
 

@@ -6,6 +6,7 @@ import { QUERY_EVENTS } from '../utils/queries';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { v4 as uuidv4 } from 'uuid';
+import './Home.css';
 
 // const { eventTitle, eventDescription, eventDate, setEventName, setEventDescription, setEventDate, handleEventSubmit, onHide } = props;
 
@@ -20,20 +21,20 @@ function MyVerticallyCenteredModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+      <Modal.Header className='bg-dark' closeButton>
+        <Modal.Title className='text-light' id="contained-modal-title-vcenter">
           Add Event
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <h4>Enter the name of your new event:</h4>
-        <input className="form-control" id="eventTitle" type="text" value={eventTitle} onChange={(e) => setEventName(e.target.value)} placeholder="Event Name"></input>
-        <h4>Enter a short description of the event:</h4>
-        <input className="form-control" id="eventDescription" type="text" value={eventDescription} onChange={(e) => setEventDescription(e.target.value)} placeholder="Description"></input>
-        <h4>Enter the date and time of your event:</h4>
-        <input className="input" id="eventDate" type="datetime-local" value={eventDate} onChange={(e) => setEventDate(e.target.value)} placeholder="Date"></input>
+      <Modal.Body className='dark'>
+        <h5 className='text-light'>Enter the name of your new event:</h5>
+        <input className="form-control bg-dark text-light" id="eventTitle" type="text" value={eventTitle} onChange={(e) => setEventName(e.target.value)} placeholder="Event Name"></input>
+        <h5 className='text-light mt-2'>Enter a short description of the event:</h5>
+        <input className="form-control bg-dark text-light" id="eventDescription" type="text" value={eventDescription} onChange={(e) => setEventDescription(e.target.value)} placeholder="Description"></input>
+        <h5 className='text-light mt-2'>Enter the date and time of your event:</h5>
+        <input className="input bg-dark text-light" id="eventDate" type="datetime-local" value={eventDate} onChange={(e) => setEventDate(e.target.value)} placeholder="Date"></input>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className='dark'>
         <Button onClick={handleEventSubmit}>Save</Button>
         <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
@@ -142,7 +143,7 @@ const Home = () => {
   };
 
   return (
-    <div className='align-center flex-column container text-center text-light bg-primary'>
+    <div className='align-center flex-column container text-center text-light background'>
 
       <div className='m-5'>
         <h2>Here's a list of all upcoming events:</h2>
