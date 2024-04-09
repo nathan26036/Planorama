@@ -28,7 +28,7 @@ const Planner = () => {
         headerToolbar: {
           left: 'prev,next',
           center: 'title',
-          right: 'timeGridWeek,timeGridDay' // user can switch between the two
+          right: 'timeGridWeek,timeGridDay' 
         }
       });
       calendar.render();
