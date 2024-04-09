@@ -37,7 +37,7 @@ const Planner = () => {
   }, [myEvents]); 
 
   // this line returns a div element with the calendarRef attached to it 
-  return <div ref={calendarRef} />;
+  return <div className='bg-light p-5' ref={calendarRef} />;
 };
 
 export default Planner;

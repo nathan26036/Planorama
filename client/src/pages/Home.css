@@ -1,3 +1,13 @@
 .background {
-    background-color: rgb(47, 47, 145);
+    background-color: rgba(47, 47, 145, 0.808);
+}
+
+.eventbtn {
+    width: 50%;
+    margin-right: 5px;
+    margin-bottom: 1%;
+}
+
+.deletebtn {
+    margin-bottom: 1%;
 }

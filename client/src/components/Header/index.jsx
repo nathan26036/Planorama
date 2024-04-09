@@ -15,23 +15,23 @@ const Header = () => {
       <div className="container-fluid">
       {Auth.loggedIn() && (
         <div className="">
-          <h1><a className=" text-light " href="/homepage">Planorama</a></h1>
+          <h1><a className="ml-5 display-3 text-light " href="/homepage">Planorama</a></h1>
         </div>
 
       )}
     {!Auth.loggedIn() && (          
-      <h1 className=" m-0" style={{ fontSize: '3rem' }}>
+      <h1 className="text-light m-0" style={{ fontSize: '3rem' }}>
       Welcome to Planorama!
     </h1>)}
-    <div className="justify-content-end" id="navbarNav">
+    <div className="mr-5 mt-2" >
           {Auth.loggedIn() && (
     
-    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+    <ul className="list-inline me-auto mb-2 mb-lg-0">
       <li className="nav-item">
-        <a className="nav-link text-light" href="/calendar">Calendar</a>
+        <h4><a className="list-inline-item text-light" href="/calendar">Calendar</a></h4>
       </li>
       <li className="nav-item">
-        <a className="nav-link text-light" onClick={logout}>Logout</a>
+        <h4><a className="list-inline-item text-light" onClick={logout}>Logout</a></h4>
       </li>
     </ul>
  

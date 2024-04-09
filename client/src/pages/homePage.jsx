@@ -28,11 +28,11 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
       <Modal.Body className='dark'>
         <h5 className='text-light'>Enter the name of your new event:</h5>
-        <input className="form-control bg-dark text-light" id="eventTitle" type="text" value={eventTitle} onChange={(e) => setEventName(e.target.value)} placeholder="Event Name"></input>
+        <input className="form-control text-light" id="eventTitle" type="text" value={eventTitle} onChange={(e) => setEventName(e.target.value)} placeholder="Event Name"></input>
         <h5 className='text-light mt-2'>Enter a short description of the event:</h5>
-        <input className="form-control bg-dark text-light" id="eventDescription" type="text" value={eventDescription} onChange={(e) => setEventDescription(e.target.value)} placeholder="Description"></input>
+        <input className="form-control text-light" id="eventDescription" type="text" value={eventDescription} onChange={(e) => setEventDescription(e.target.value)} placeholder="Description"></input>
         <h5 className='text-light mt-2'>Enter the date and time of your event:</h5>
-        <input className="input bg-dark text-light" id="eventDate" type="datetime-local" value={eventDate} onChange={(e) => setEventDate(e.target.value)} placeholder="Date"></input>
+        <input className="input" id="eventDate" type="datetime-local" value={eventDate} onChange={(e) => setEventDate(e.target.value)} placeholder="Date"></input>
       </Modal.Body>
       <Modal.Footer className='dark'>
         <Button onClick={handleEventSubmit}>Save</Button>
@@ -52,20 +52,20 @@ function DisplayEventModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header className='bg-dark' closeButton>
         <Modal.Title id='contained-modal-title-vcenter'>
-          {eventTitle}
+         <h2 className='text-light'>{eventTitle}</h2> 
         </Modal.Title>
       </Modal.Header>
 
-      <Modal.Body>
-        <h2>Description:</h2>
-        <p>{eventDescription}</p>
-        <h3>Date:</h3>
-        <p>{eventDate}</p>
+      <Modal.Body className='dark'>
+        <h2 className='text-light'>Description:</h2>
+        <p className='text-light h4'>{eventDescription}</p>
+        <h3 className='text-light '>Date:</h3>
+        <p className='text-light h4'>{eventDate}</p>
       </Modal.Body>
 
-      <Modal.Footer>
+      <Modal.Footer className='dark'>
         <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
 
@@ -152,17 +152,17 @@ const Home = () => {
           <div>Loading...</div>
         ) : (
           <>
-          <ul className='square'>
+          <ul className='square mt-4'>
             {/* mapping through event list and rendering each event and linking to the actual event */}
             {eventList.map((event) => (
               // generating each title of events by ID
               <li key={event._id} >
                 
-                <Button variant="primary" onClick={() => {setdataShow(true); handleEventDisplay(event._id);}}>
+                <Button className='eventbtn' variant="primary" onClick={() => {setdataShow(true); handleEventDisplay(event._id);}}>
                   {event.title}
                 </Button>
 
-                <button onClick={() => deleteEvent(event._id)} className='btn btn-danger delete-button'>Delete</button>
+                <button onClick={() => deleteEvent(event._id)} className='btn btn-danger delete-button deletebtn'>Delete</button>
 
               </li>
             ))}
